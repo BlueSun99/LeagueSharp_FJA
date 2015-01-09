@@ -36,7 +36,7 @@ namespace FlashJukeAssistant
             Game.OnGameUpdate += OnGameUpdate;
             setupCoords();
             Config = new Menu("Flash Juke Assistant", "Flash Juke Assistant", true);
-            Config.AddItem(new MenuItem("key", "Keybind: ")).SetValue(new KeyBind((byte)'T', KeyBindType.Press));
+            Config.AddItem(new MenuItem("key", "Keybind: ")).SetValue(new KeyBind((byte) 'T', KeyBindType.Press));
             Config.AddItem(new MenuItem("ward", "Use Wards: ")).SetValue(true);
             Config.AddToMainMenu();
 
