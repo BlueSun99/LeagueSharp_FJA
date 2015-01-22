@@ -130,7 +130,7 @@ namespace FlashJukeAssistant
                         }
                         Render.Circle.DrawCircle(SpotsVector[i], 50, System.Drawing.Color.LightGreen, thick);
                     }
-                    else
+                    else if(i != flashSpot && SpotsVector[i].IsOnScreen())
                     {
                         if (ObjectManager.Player.Spellbook.CanUseSpell(flash) == SpellState.Ready)
                         {
