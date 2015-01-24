@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6195C870-6369-4FB2-89B9-93F3469BE829}</ProjectGuid>
+    <ProjectGuid>{ADEFD38E-FA84-41F7-B1B5-BFFB269FD5A4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FlashJukeAssistant</RootNamespace>

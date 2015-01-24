@@ -14,7 +14,7 @@ namespace FlashJukeAssistant
         public static float delayTime = 0.1f;
         public static int flashSpot = 0;
         public static int setdist1 = 650; //FOR CHECKS
-        public static int thick = 10;
+        public static int thick = 1;
         public static bool mustCheckForWards = true; //ally wards
         private static Menu Config;
         private static SpellSlot flash = ObjectManager.Player.GetSpellSlot("SummonerFlash");
@@ -36,8 +36,9 @@ namespace FlashJukeAssistant
             Game.OnGameUpdate += OnGameUpdate;
             setupCoords();
             Config = new Menu("Flash Juke Assistant", "Flash Juke Assistant", true);
-            Config.AddItem(new MenuItem("key", "Keybind: ")).SetValue(new KeyBind((byte) 'T', KeyBindType.Press));
+            Config.AddItem(new MenuItem("key", "Keybind: ")).SetValue(new KeyBind((byte)'T', KeyBindType.Press));
             Config.AddItem(new MenuItem("ward", "Use Wards: ")).SetValue(true);
+            Config.AddItem(new MenuItem("disabledraw", "Disable Drawings: ")).SetValue(false);
             Config.AddToMainMenu();
 
         }
@@ -117,23 +118,26 @@ namespace FlashJukeAssistant
         }
         private static void OnDraw(EventArgs args)
         {
-            for (int i = 0; i < 28; i++)
+            if (!Config.Item("disabledraw").GetValue<bool>())
             {
-                if (i == flashSpot)
+                for (int i = 0; i < 28; i++)
                 {
-                    if (ObjectManager.Player.Spellbook.CanUseSpell(flash) == SpellState.Ready)
+                    if (i == flashSpot && SpotsVector[i].IsOnScreen())
                     {
-                        Drawing.DrawLine(Drawing.WorldToScreen(SpotsVector[i]), Drawing.WorldToScreen(SpotsFinalVector[i]), 2, System.Drawing.Color.LightGreen);
+                        if (ObjectManager.Player.Spellbook.CanUseSpell(flash) == SpellState.Ready)
+                        {
+                            Drawing.DrawLine(Drawing.WorldToScreen(SpotsVector[i]), Drawing.WorldToScreen(SpotsFinalVector[i]), 2, System.Drawing.Color.LightGreen);
+                        }
+                        Render.Circle.DrawCircle(SpotsVector[i], 50, System.Drawing.Color.LightGreen, thick);
                     }
-                    Render.Circle.DrawCircle(SpotsVector[i], 50, System.Drawing.Color.LightGreen, thick);
-                }
-                else
-                {
-                    if (ObjectManager.Player.Spellbook.CanUseSpell(flash) == SpellState.Ready)
+                    else if (i != flashSpot && SpotsVector[i].IsOnScreen())
                     {
-                        Drawing.DrawLine(Drawing.WorldToScreen(SpotsVector[i]), Drawing.WorldToScreen(SpotsFinalVector[i]), 2, System.Drawing.Color.Red);
+                        if (ObjectManager.Player.Spellbook.CanUseSpell(flash) == SpellState.Ready)
+                        {
+                            Drawing.DrawLine(Drawing.WorldToScreen(SpotsVector[i]), Drawing.WorldToScreen(SpotsFinalVector[i]), 2, System.Drawing.Color.Red);
+                        }
+                        Render.Circle.DrawCircle(SpotsVector[i], 50, System.Drawing.Color.Red, thick);
                     }
-                    Render.Circle.DrawCircle(SpotsVector[i], 50, System.Drawing.Color.Red, thick);
                 }
             }
         }
