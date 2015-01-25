@@ -36,7 +36,7 @@ namespace FlashJukeAssistant
             Game.OnGameUpdate += OnGameUpdate;
             setupCoords();
             Config = new Menu("Flash Juke Assistant", "Flash Juke Assistant", true);
-            Config.AddItem(new MenuItem("key", "Keybind: ")).SetValue(new KeyBind((byte) 'T', KeyBindType.Press));
+            Config.AddItem(new MenuItem("key", "Keybind: ")).SetValue(new KeyBind((byte)'T', KeyBindType.Press));
             Config.AddItem(new MenuItem("ward", "Use Wards: ")).SetValue(true);
             Config.AddItem(new MenuItem("disabledraw", "Disable Drawings: ")).SetValue(false);
             Config.AddToMainMenu();
@@ -130,7 +130,7 @@ namespace FlashJukeAssistant
                         }
                         Render.Circle.DrawCircle(SpotsVector[i], 50, System.Drawing.Color.LightGreen, thick);
                     }
-                    else if(i != flashSpot && SpotsVector[i].IsOnScreen())
+                    else if (i != flashSpot && SpotsVector[i].IsOnScreen())
                     {
                         if (ObjectManager.Player.Spellbook.CanUseSpell(flash) == SpellState.Ready)
                         {
