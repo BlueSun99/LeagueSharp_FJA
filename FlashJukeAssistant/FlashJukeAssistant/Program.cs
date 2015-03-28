@@ -33,7 +33,7 @@ namespace FlashJukeAssistant
         private static void OnGameLoad(EventArgs args)
         {
             Drawing.OnDraw += OnDraw;
-            Game.OnGameUpdate += OnGameUpdate;
+            Game.OnUpdate += OnUpdate;
             setupCoords();
             Config = new Menu("Flash Juke Assistant", "Flash Juke Assistant", true);
             Config.AddItem(new MenuItem("key", "Keybind: ")).SetValue(new KeyBind((byte)'T', KeyBindType.Press));
@@ -42,7 +42,7 @@ namespace FlashJukeAssistant
             Config.AddToMainMenu();
 
         }
-        private static void OnGameUpdate(EventArgs args)
+        private static void OnUpdate(EventArgs args)
         {
             if (!(Config.Item("key").GetValue<KeyBind>().Active))
             {
